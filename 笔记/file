@@ -1,0 +1,66 @@
+快速创建springboot项目：
+    创建项目的时候笔试maven项目而是spring-initializer（忘了）项目
+    如果想要刷新导入的依赖可以点击右边的Maven然后点击最左边的刷新
+    按钮即可。
+applicaton.properties 里面可以修改一些默认设置。
+static:缓存所有的静态资源：js，css，mages
+templates：保存所有的模板页面：springboot默认jar包使用嵌入式Tomcat，默认不支持
+JSP页面；可以使用模板引擎（freemarker，thymeleaf）
+
+yml是yaml的缩写-----以数据为中心
+yml替代了以前的xml文件：
+        以前的xml：----浪费在了标签上面
+                <server>
+                    <port>8081</port>
+                </server>
+        而yml或yaml则是以数据为中心
+                 server：
+                    port：8081
+注意空格--以空格的缩进来控制层级关系
+同一层级的在同一列
+
+值的写法：
+      字面量：普通的值（数字，字符串，布尔）
+      字符串默认不用加单引号或者是双引号
+      “”：双引号不会转义字符串里面的特殊字符，特殊字符会作为本身想表示的意思
+      name：“zhangshan \n lisi";输出：zhangshan 换行 lisi
+      ‘’：单引号：会转义特殊字符，特殊字符最总只是一个普通的字符串数据
+      name：“zhangshan \n lisi :输出：zhangshan \n lisi
+
+
+      对象、map（属性和值）
+      friends:
+            lastName: zhangshan
+            age: 20
+      行内写法：
+      friends：{lastName：zhangsan，age：18}
+
+数组写法：
+       pets：
+        -cat
+        -dog
+        -pig
+      行内写法：
+        pets：[cat,dog,pig]
+
+
+其中遇到的问题：
+
+乱码问题：
+    找到项目的File -> Settings -> Editor -> File Encodings
+    将里面的上面两个都设置为utf-8
+    下面的properties也设置为utf-8
+@ConfigurationProperties 和@Value区别：
+            @ConfigurationProperties    @Value
+    功能         批量注入配置文件中的属性     一个一个注入
+    松散绑定      支持                       不支持
+    SpEl         不支持                      支持
+    JSP303数据校验  支持                      不支持
+    复杂类型封装    支持                       不支持
+松散语法绑定就是配置文件中的比如last-name和lastName是否识别
+数据校验就是在属性上加上比如@Email这样的注解：就说明这个属性的格式必须是email的格式
+SpEl就是spring的表达式语言比如在属性上#{11*2} 这个能不能算出来
+
+
+如果说，我们只是在某个业务逻辑中需要获取一下配置文件中的某个值，使用@Value
+如果说，我们专门编写了一个javaBean来和配置文件进行映射，我们就直接使用@ConfigurationProperties
